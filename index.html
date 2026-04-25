@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nama Anda | Creative Technologist</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf2f2',
+                            400: '#f05252',
+                            500: '#DA291C', // Manchester United Red
+                            600: '#b02117', // Darker MU Red
+                        },
+                        surface: {
+                            50: '#fcfbf9',  // Warm paper white
+                            100: '#f4f1ee', // Off-white untuk card
+                        },
+                        zinc: {
+                            800: '#27272a',
+                            900: '#18181b', // Hitam pekat
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'], // Font artistik untuk Heading
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #fcfbf9;
+            /* Pola Dot Grid Samar - Tetap dipertahankan untuk kesan teknis */
+            background-image: radial-gradient(#e5e1d8 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .font-display {
+            font-family: '"Space Grotesk"', sans-serif;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Gradien merah MU ke merah gelap */
+            background-image: linear-gradient(135deg, #DA291C, #8a1710);
+        }
+
+        /* Hover efek pada galeri: TANPA DROPSHADOW, murni pergerakan dan garis */
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            border-radius: 1rem;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            border: 1px solid #e4e4e7;
+        }
+        .gallery-item img {
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            border-color: #DA291C;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-overlay {
+            background: linear-gradient(to top, rgba(24, 24, 27, 0.95) 0%, rgba(24, 24, 27, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Custom Selection Color */
+        ::selection {
+            background-color: #DA291C;
+            color: white;
+        }
+    </style>
+</head>
+<body class="text-zinc-800 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-[#fcfbf9]/95 backdrop-blur-sm border-b border-zinc-200 transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-24">
+                <div class="flex-shrink-0 font-display font-bold text-2xl tracking-tighter text-zinc-900">
+                    Nama<span class="text-brand-500">.</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 font-display">
+                        <a href="#home" class="text-zinc-500 hover:text-zinc-900 transition-colors px-2 py-2 text-sm font-medium tracking-wide">Beranda</a>
+                        <a href="#experience" class="text-zinc-500 hover:text-zinc-900 transition-colors px-2 py-2 text-sm font-medium tracking-wide">Profil</a>
+                        <a href="#portfolio" class="text-zinc-500 hover:text-zinc-900 transition-colors px-2 py-2 text-sm font-medium tracking-wide">Karya Visual</a>
+                        <a href="#automation" class="text-zinc-500 hover:text-brand-500 transition-colors px-2 py-2 text-sm font-medium tracking-wide">Sistem Web</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-36 pb-20 md:pt-48 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto flex flex-col md:flex-row items-center">
+        <div class="md:w-3/5 pr-0 md:pr-12">
+            <div class="inline-flex items-center px-3 py-1 rounded-full border border-brand-500 bg-brand-50 text-xs font-display font-bold text-brand-500 mb-6 tracking-widest uppercase">
+                Creative Technologist
+            </div>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight mb-6 leading-[1.1] text-zinc-900">
+                Solusi visual presisi, <br>
+                didukung <span class="gradient-text italic">sistem.</span>
+            </h1>
+            <p class="text-zinc-600 text-lg md:text-xl mb-10 max-w-2xl leading-relaxed font-light">
+                Menghasilkan karya desain dan video yang detail secara visual, sekaligus membangun sistem web agar alur kerja bisnis Anda berjalan lebih cepat tanpa batas manual.
+            </p>
+            <div class="flex flex-wrap gap-4 font-display">
+                <!-- Flat button design -->
+                <a href="#portfolio" class="bg-zinc-900 hover:bg-brand-500 text-white font-medium py-3.5 px-8 rounded-full transition-colors duration-300 flex items-center border border-zinc-900 hover:border-brand-500">
+                    Lihat Portofolio <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                </a>
+                <a href="#experience" class="bg-transparent hover:bg-zinc-100 text-zinc-900 font-medium py-3.5 px-8 rounded-full transition-colors duration-300 border border-zinc-300 flex items-center">
+                    Baca Profil
+                </a>
+            </div>
+        </div>
+        <div class="md:w-2/5 mt-16 md:mt-0 flex justify-center">
+            <!-- Frame Nyeni untuk foto profil (Flat style) -->
+            <div class="relative">
+                <div class="w-64 h-80 md:w-80 md:h-[400px] rounded-3xl bg-surface-100 border-2 border-zinc-900 flex items-center justify-center overflow-hidden">
+                    <!-- Ganti icon ini dengan Tag <img> foto Anda -->
+                    <i class="fas fa-user-astronaut text-7xl text-zinc-300"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profil & Pengalaman -->
+    <section id="experience" class="py-24 bg-white border-y border-zinc-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 md:flex md:justify-between md:items-end border-b border-zinc-200 pb-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl font-display font-bold text-zinc-900 mb-4">Profil Eksekutor Visual.</h2>
+                    <p class="text-zinc-500 text-lg">Mengintegrasikan produksi kreatif visual (Desain & 3D) dengan efisiensi sistem teknologi secara selaras.</p>
+                </div>
+                <div class="mt-8 md:mt-0">
+                    <!-- Padding diperbesar (p-6) dan Jarak ikon ke teks dijauhkan (gap-6) -->
+                    <div class="p-6 bg-brand-50 rounded-2xl border border-brand-500 flex items-center gap-6">
+                        <i class="fas fa-certificate text-brand-500 text-4xl"></i>
+                        <div>
+                            <h4 class="font-display font-bold text-zinc-900 text-base">CSWP Certified</h4>
+                            <p class="text-sm text-brand-600 mt-1">Dassault Systèmes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Kolom Pengalaman Kerja -->
+                <div class="lg:col-span-7 space-y-8">
+                    <!-- Pengalaman Awal (2013 - 2024) -->
+                    <div class="group relative">
+                        <div class="absolute -left-4 top-0 w-1 h-full bg-zinc-200 group-hover:bg-brand-500 transition-colors duration-300"></div>
+                        
+                        <div class="pl-4">
+                            <span class="text-brand-500 font-display font-bold text-sm tracking-widest uppercase mb-1 block">[Nama Perusahaan] &bull; 2013 - 2024</span>
+                            <h3 class="text-2xl font-display font-bold text-zinc-900 mb-6">IT Desainer Grafis</h3>
+                            
+                            <div class="space-y-8 text-zinc-600">
+                                <!-- Kategori 1 -->
+                                <div>
+                                    <h4 class="font-display font-bold text-zinc-900 mb-4 border-b border-zinc-200 pb-2">Visual Branding & Creative Production</h4>
+                                    <ul class="space-y-4">
+                                        <li class="flex items-start">
+                                            <span class="mt-2 mr-4 w-1.5 h-1.5 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                            <span><strong>Pengembangan Aset Pemasaran & QC:</strong> Mentransformasi konsep kampanye dari tim sales menjadi desain visual presisi untuk media cetak (MMT, X-Banner, Brosur). Memastikan standar kualitas tinggi dan keselarasan identitas perusahaan.</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mt-2 mr-4 w-1.5 h-1.5 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                            <span><strong>Inovasi & Desain Produk:</strong> Merancang desain velg inovatif menggunakan Solidworks sesuai tren terkini, serta mempresentasikannya kepada tim sales untuk memastikan kesesuaian kebutuhan pasar.</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mt-2 mr-4 w-1.5 h-1.5 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                            <span><strong>Produksi Video Pendek:</strong> Memproduksi dan mengedit konten video pendek profesional yang dioptimalkan untuk meningkatkan <i>engagement</i> pada platform promosi digital.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Kategori 2 -->
+                                <div>
+                                    <h4 class="font-display font-bold text-zinc-900 mb-4 border-b border-zinc-200 pb-2">Strategic Collaboration & Technical Systems</h4>
+                                    <ul class="space-y-4">
+                                        <li class="flex items-start">
+                                            <span class="mt-2 mr-4 w-1.5 h-1.5 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                            <span><strong>Kolaborasi Antar Departemen:</strong> Bertindak sebagai mitra visual dalam diskusi strategis bersama tim sales, memberikan masukan kreatif, serta mengeksekusi ide menjadi materi promosi tepat sasaran.</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mt-2 mr-4 w-1.5 h-1.5 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                            <span><strong>Optimasi Alur Kerja:</strong> Mengintegrasikan teknologi AI dan otomatisasi untuk mempercepat proses produksi kreatif dengan tetap menjaga presisi dan detail pada setiap hasil desain.</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mt-2 mr-4 w-1.5 h-1.5 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                            <span><strong>Dukungan Infrastruktur Teknis:</strong> Mengelola pemeliharaan perangkat keras serta memberikan dukungan teknis (<i>troubleshooting</i>) secara langsung maupun <i>remote</i> untuk menjamin kelancaran operasional.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pengalaman Sekarang (2024 - Sekarang) -->
+                    <div class="group relative mt-12">
+                        <div class="absolute -left-4 top-0 w-1 h-full bg-zinc-200 group-hover:bg-brand-500 transition-colors duration-300"></div>
+                        
+                        <div class="pl-4">
+                            <span class="text-brand-500 font-display font-bold text-sm tracking-widest uppercase mb-1 block">[Nama Perusahaan] &bull; 2024 - Sekarang</span>
+                            <h3 class="text-2xl font-display font-bold text-zinc-900 mb-6">Creative Technologist</h3>
+                            
+                            <ul class="space-y-6 text-zinc-600">
+                                <li class="flex items-start">
+                                    <span class="mt-1.5 mr-4 w-2 h-2 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                    <span><strong class="text-zinc-900">Visual Production:</strong> Mengolah konsep kampanye dari tim sales menjadi desain siap cetak (MMT, X-Banner, Brosur) dan konten promosi digital yang presisi dan tajam.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="mt-1.5 mr-4 w-2 h-2 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                    <span><strong class="text-zinc-900">Video & Sinematografi:</strong> Menangani proses ideasi, pengambilan gambar, hingga pengeditan video pendek profesional untuk kebutuhan media sosial secara mandiri.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="mt-1.5 mr-4 w-2 h-2 bg-zinc-300 group-hover:bg-brand-500 flex-shrink-0 transition-colors"></span>
+                                    <span><strong class="text-zinc-900">Technical Support & System:</strong> Merancang website fungsional (Sistem BOP & E-Voucher) berbasis AI, serta mengelola pemeliharaan <i>hardware</i> operasional.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kolom Keahlian Spesifik (Flat design tags) -->
+                <div class="lg:col-span-5 bg-surface-100 p-8 rounded-3xl border border-zinc-200">
+                    <h3 class="text-xl font-display font-bold text-zinc-900 mb-6">Stack & Tools</h3>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-4">Desain & 3D</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-white text-zinc-800 rounded-lg text-sm font-medium border border-zinc-300">Photoshop</span>
+                            <span class="px-4 py-2 bg-white text-zinc-800 rounded-lg text-sm font-medium border border-zinc-300">Premiere Pro</span>
+                            <span class="px-4 py-2 bg-white text-zinc-800 rounded-lg text-sm font-medium border border-zinc-300">Figma</span>
+                            <span class="px-4 py-2 bg-zinc-900 text-white rounded-lg text-sm font-medium border border-zinc-900">Solidworks</span>
+                            <span class="px-4 py-2 bg-white text-zinc-800 rounded-lg text-sm font-medium border border-zinc-300">SketchUp</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-zinc-400 uppercase tracking-wider mb-4">Web & Otomatisasi</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 bg-white text-zinc-800 rounded-lg text-sm font-medium border border-zinc-300">PHP / Laravel</span>
+                            <span class="px-4 py-2 bg-brand-50 text-brand-600 rounded-lg border border-brand-500 text-sm font-medium">Apps Script (GAS)</span>
+                            <span class="px-4 py-2 bg-white text-zinc-800 rounded-lg text-sm font-medium border border-zinc-300">HTML / CSS</span>
+                            <span class="px-4 py-2 bg-white text-zinc-800 rounded-lg text-sm font-medium border border-zinc-300">AI Prompting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Karya -->
+    <section id="portfolio" class="py-24">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-zinc-900 mb-6">Arsip <span class="gradient-text">Visual.</span></h2>
+                <p class="text-zinc-500 max-w-2xl mx-auto text-lg font-light">Bukti nyata eksekusi estetik dari gambar teknis hingga materi pemasaran. Klik untuk memperbesar karya.</p>
+            </div>
+
+            <!-- Grid Galeri (Flat without shadow) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+                
+                <div class="gallery-item bg-surface-100 h-80 rounded-2xl" onclick="openModal('https://images.unsplash.com/photo-1626785776965-4c5151cbb00f?q=80&w=1470&auto=format&fit=crop', 'Desain Pemasaran', 'Brosur & MMT Promosi')">
+                    <img src="https://images.unsplash.com/photo-1626785776965-4c5151cbb00f?q=80&w=1470&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0" alt="Desain Promosi">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <span class="text-brand-400 font-display text-xs font-bold uppercase tracking-widest mb-2">Photoshop</span>
+                        <h3 class="text-white font-display font-bold text-xl">Brosur & MMT</h3>
+                    </div>
+                </div>
+
+                <div class="gallery-item bg-surface-100 h-80 lg:col-span-2 rounded-2xl" onclick="openModal('https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1470&auto=format&fit=crop', 'Pemodelan 3D Velg', 'Solidworks')">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1470&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0" alt="Solidworks 3D">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <span class="text-brand-400 font-display text-xs font-bold uppercase tracking-widest mb-2">Inovasi Produk</span>
+                        <h3 class="text-white font-display font-bold text-2xl">Pemodelan 3D Velg (Solidworks)</h3>
+                    </div>
+                </div>
+
+                <div class="gallery-item bg-surface-100 h-80 rounded-2xl" onclick="openModal('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1364&auto=format&fit=crop', 'Konten Media Sosial', 'Aset Digital & Feed Instagram')">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1364&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0" alt="Konten Medsos">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <span class="text-brand-400 font-display text-xs font-bold uppercase tracking-widest mb-2">UI/UX & Digital</span>
+                        <h3 class="text-white font-display font-bold text-xl">Aset Digital & Feed IG</h3>
+                    </div>
+                </div>
+
+                <div class="gallery-item bg-surface-100 h-80 rounded-2xl" onclick="openModal('https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=1470&auto=format&fit=crop', 'Identitas Perusahaan', 'Desain X-Banner Acara Sales')">
+                    <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=1470&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0" alt="X-Banner">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <span class="text-brand-400 font-display text-xs font-bold uppercase tracking-widest mb-2">Cetak & Pemasaran</span>
+                        <h3 class="text-white font-display font-bold text-xl">Desain X-Banner Sales</h3>
+                    </div>
+                </div>
+
+                 <div class="gallery-item bg-surface-100 h-80 rounded-2xl" onclick="openModal('https://images.unsplash.com/photo-1503328427499-d92d1fa3ca1c?q=80&w=1470&auto=format&fit=crop', 'Gambar Teknis', 'Desain Struktural SketchUp')">
+                    <img src="https://images.unsplash.com/photo-1503328427499-d92d1fa3ca1c?q=80&w=1470&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0" alt="Struktur">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <span class="text-brand-400 font-display text-xs font-bold uppercase tracking-widest mb-2">Gambar Teknis</span>
+                        <h3 class="text-white font-display font-bold text-xl">Desain Struktural (SketchUp)</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bagian Video (Flat Style) -->
+            <div class="border-t border-zinc-200 pt-20">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-10">
+                    <div>
+                        <h2 class="text-3xl font-display font-bold text-zinc-900">Produksi <span class="text-brand-500">Video.</span></h2>
+                        <p class="text-zinc-500 mt-2">Visual storytelling dari proses syuting hingga pengeditan akhir.</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Video 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="aspect-[4/5] bg-zinc-100 rounded-2xl border border-zinc-200 relative overflow-hidden mb-5">
+                            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1471&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Thumbnail">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <!-- Tombol Play Flat -->
+                                <div class="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center text-white text-xl border-2 border-transparent group-hover:bg-brand-500 group-hover:border-white transition-all">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-zinc-900 mb-1 group-hover:text-brand-500 transition-colors">Kampanye Peluncuran Produk</h3>
+                        <p class="text-zinc-500 text-sm">Sinematik & Editing (Premiere Pro)</p>
+                    </div>
+
+                    <!-- Video 2 -->
+                    <div class="group cursor-pointer">
+                        <div class="aspect-[4/5] bg-zinc-100 rounded-2xl border border-zinc-200 relative overflow-hidden mb-5">
+                            <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=1600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Thumbnail">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center text-white text-xl border-2 border-transparent group-hover:bg-brand-500 group-hover:border-white transition-all">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-zinc-900 mb-1 group-hover:text-brand-500 transition-colors">Konten Interaktif (Reels)</h3>
+                        <p class="text-zinc-500 text-sm">Fast-paced Editing (Capcut)</p>
+                    </div>
+
+                    <!-- Video 3 -->
+                    <div class="group cursor-pointer">
+                        <div class="aspect-[4/5] bg-zinc-100 rounded-2xl border border-zinc-200 relative overflow-hidden mb-5">
+                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1470&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" alt="Thumbnail">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-zinc-900 rounded-full flex items-center justify-center text-white text-xl border-2 border-transparent group-hover:bg-brand-500 group-hover:border-white transition-all">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-display font-bold text-zinc-900 mb-1 group-hover:text-brand-500 transition-colors">Dokumentasi B-Roll Acara</h3>
+                        <p class="text-zinc-500 text-sm">Event Coverage & Archiving</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Sistem Web & Automasi -->
+    <section id="automation" class="py-24 bg-zinc-900 text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-display font-bold mb-4">Sisi <span class="text-brand-500">Technologist.</span></h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto text-lg font-light">Membangun web dan otomatisasi untuk menyederhanakan alur kerja administratif.</p>
+            </div>
+
+            <!-- Menambahkan items-stretch agar tinggi grid sama -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+                <!-- Card 1 (Ditambahkan flex flex-col h-full) -->
+                <div class="bg-zinc-900 p-10 rounded-3xl border-2 border-zinc-700 hover:border-brand-500 transition-colors duration-300 flex flex-col h-full">
+                    <div class="flex items-center mb-8">
+                        <div class="w-14 h-14 rounded-2xl bg-zinc-800 flex items-center justify-center text-2xl mr-5 border border-zinc-600 flex-shrink-0">
+                            <i class="fas fa-robot text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-display font-bold">Website Sistem BOP</h3>
+                            <p class="text-brand-400 font-medium text-sm mt-1">AI-Assisted Development, Web Tech</p>
+                        </div>
+                    </div>
+                    <!-- Ditambahkan flex-grow agar paragraf mengisi sisa ruang kosong -->
+                    <p class="text-zinc-300 mb-8 leading-relaxed font-light flex-grow">
+                        Memanfaatkan kapabilitas AI (AI-Prompting) secara optimal untuk memprogram dan membangun ekosistem digital terpusat sistem Biaya Operasional Perusahaan (BOP). Solusi efisien yang sukses menggantikan pencatatan konvensional.
+                    </p>
+                    <!-- Ditambahkan mt-auto agar selalu terdorong ke paling bawah -->
+                    <div class="border-l-2 border-brand-500 pl-4 mt-auto">
+                        <p class="text-xs text-zinc-500 font-bold uppercase tracking-widest mb-1">Dampak Solusi</p>
+                        <p class="text-sm text-zinc-100">Pelacakan dan persetujuan operasional oleh manajemen berjalan sistematis secara real-time.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 (Ditambahkan flex flex-col h-full) -->
+                <div class="bg-zinc-900 p-10 rounded-3xl border-2 border-zinc-700 hover:border-brand-500 transition-colors duration-300 flex flex-col h-full">
+                    <div class="flex items-center mb-8">
+                        <div class="w-14 h-14 rounded-2xl bg-zinc-800 flex items-center justify-center text-2xl mr-5 border border-zinc-600 flex-shrink-0">
+                            <i class="fab fa-google text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-display font-bold">Otomatisasi E-Voucher</h3>
+                            <p class="text-brand-400 font-medium text-sm mt-1">Google Apps Script (GAS) & AI</p>
+                        </div>
+                    </div>
+                    <!-- Ditambahkan flex-grow agar paragraf mengisi sisa ruang kosong -->
+                    <p class="text-zinc-300 mb-8 leading-relaxed font-light flex-grow">
+                        Mengembangkan sistem otomatisasi berbasis skrip menggunakan GAS dan logika AI untuk mendistribusikan, memvalidasi, dan mengelola arus data E-Voucher.
+                    </p>
+                    <!-- Ditambahkan mt-auto agar selalu terdorong ke paling bawah -->
+                    <div class="border-l-2 border-brand-500 pl-4 mt-auto">
+                        <p class="text-xs text-zinc-500 font-bold uppercase tracking-widest mb-1">Dampak Solusi</p>
+                        <p class="text-sm text-zinc-100">Memangkas jam kerja manual staf admin harian dan mengeliminasi 100% risiko <i>human error</i>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Estetik -->
+    <footer class="bg-zinc-950 py-16 text-center border-t border-zinc-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-display font-bold mb-8 text-white">Siap berkolaborasi.</h2>
+            <div class="flex justify-center space-x-6 mb-12">
+                <!-- Flat Icon Buttons -->
+                <a href="#" class="w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300"><i class="fab fa-linkedin-in text-xl"></i></a>
+                <a href="#" class="w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300"><i class="fas fa-envelope text-xl"></i></a>
+                <a href="#" class="w-12 h-12 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-400 hover:bg-brand-500 hover:text-white hover:border-brand-500 transition-all duration-300"><i class="fab fa-whatsapp text-xl"></i></a>
+            </div>
+            <p class="text-zinc-600 text-sm font-light">
+                &copy; 2026 Crafted with code by Creative Technologist.
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL LIGHTBOX (Tanpa Shadow) -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-zinc-950/95 hidden flex flex-col items-center justify-center opacity-0 transition-opacity duration-400">
+        <button onclick="closeModal()" class="absolute top-6 right-6 text-zinc-500 hover:text-white text-4xl focus:outline-none transition-colors">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="max-w-5xl w-full px-4 flex flex-col items-center">
+            <!-- Dibuat flat border -->
+            <img id="lightbox-img" src="" alt="Zoomed Image" class="max-h-[85vh] object-contain border border-zinc-800 mb-8 bg-zinc-900 rounded-2xl">
+            <h3 id="lightbox-title" class="text-3xl font-display font-bold text-white mb-2 text-center"></h3>
+            <p id="lightbox-desc" class="text-brand-400 font-medium tracking-wide text-center uppercase text-sm"></p>
+        </div>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDesc = document.getElementById('lightbox-desc');
+
+        function openModal(imgSrc, title, desc) { 
+            lightboxImg.src = imgSrc; 
+            lightboxTitle.innerText = title; 
+            lightboxDesc.innerText = desc; 
+            
+            lightbox.classList.remove('hidden');
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightbox.classList.add('opacity-100');
+            }, 10);
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            lightbox.classList.remove('opacity-100');
+            lightbox.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 400);
+        }
+
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeModal();
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
