@@ -4,284 +4,901 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HANDI PURNAWAN | Creative Technologist</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NVL3FW4SYQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NVL3FW4SYQ');
-</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23DA291C%22/><text x=%2250%22 y=%2272%22 font-family=%22sans-serif%22 font-weight=%22bold%22 font-size=%2265%22 fill=%22white%22 text-anchor=%22middle%22>H</text></svg>" type="image/svg+xml">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"/>
-<script>
-tailwind.config={theme:{extend:{colors:{brand:{500:'#DA291C',600:'#B91C1C'}},fontFamily:{sans:['Inter','sans-serif'],display:['"Space Grotesk"','sans-serif']},animation:{'float':'float 6s ease-in-out infinite','float-d':'float 6s ease-in-out 3s infinite','marquee':'marquee 25s linear infinite'},keyframes:{float:{'0%,100%':{transform:'translateY(0)'},'50%':{transform:'translateY(-20px)'}},marquee:{'0%':{transform:'translateX(0)'},'100%':{transform:'translateX(-50%)'}}}}}}
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
-:root{--bg:#ffffff;--text:#171717;--accent:#DA291C}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden}
+:root {
+  --bg: #f8f7f4;
+  --bg2: #ffffff;
+  --text: #1a1a1a;
+  --muted: #8a8a8a;
+  --accent: #DA291C;
+  --accent2: #ff6b5b;
+  --border: rgba(0,0,0,0.08);
+  --card: rgba(255,255,255,0.9);
+}
 
-/* Cursor */
-#cursor{width:18px;height:18px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform .15s ease,opacity .3s;mix-blend-mode:difference;transform:translate(-50%,-50%)}
-#cursor-trail{width:36px;height:36px;border:1.5px solid var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:left .1s ease,top .1s ease,transform .3s;transform:translate(-50%,-50%);opacity:.4}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
-/* Progress bar */
-#prog{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:200;width:0%;transition:width .1s}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
 
-/* Reveal */
-.reveal{opacity:0;transform:translateY(50px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.reveal.active{opacity:1;transform:none}
+/* ── CUSTOM CURSOR ── */
+#csr {
+  width: 10px; height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .3s, height .3s, background .3s;
+}
+#csr-ring {
+  width: 40px; height: 40px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all .12s ease;
+  opacity: .5;
+}
+body:has(a:hover) #csr,
+body:has(button:hover) #csr { width: 48px; height: 48px; background: transparent; border: 2px solid var(--accent); }
 
-/* Magnetic */
-.magnetic{display:inline-block;transition:transform .3s cubic-bezier(.23,1,.32,1)}
+/* ── PROGRESS ── */
+#prog {
+  position: fixed; top: 0; left: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  z-index: 500; width: 0; transition: width .05s;
+}
 
-/* Marquee */
-.marquee-wrap{overflow:hidden;width:100%}
-.marquee-inner{display:flex;width:max-content;animation:marquee 30s linear infinite}
-.marquee-inner:hover{animation-play-state:paused}
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all .5s;
+}
+nav.scrolled {
+  background: rgba(248,247,244,.92);
+  backdrop-filter: blur(20px);
+  padding: 1rem 3rem;
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+  text-decoration: none; color: var(--text);
+  letter-spacing: -.02em;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--muted);
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  transition: color .3s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1.5px; background: var(--accent);
+  transition: width .3s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
 
-/* Skills card hover */
-.skill-card{transition:transform .3s,box-shadow .3s;cursor:default}
-.skill-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(218,41,28,.08)}
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(60px);
+  transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+}
+.reveal.from-left { transform: translateX(-60px); }
+.reveal.from-right { transform: translateX(60px); }
+.reveal.scale-in { transform: scale(.9); }
+.reveal.active { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: .1s; }
+.reveal-d2 { transition-delay: .2s; }
+.reveal-d3 { transition-delay: .3s; }
+.reveal-d4 { transition-delay: .4s; }
 
-/* Portfolio grid */
-.port-item{transition:opacity .4s,transform .4s}
-.port-item.hide{opacity:0;transform:scale(.95);pointer-events:none;position:absolute}
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
 
-/* Image hover */
-.img-wrap{clip-path:inset(0% 0% 0% 0% round 1.5rem);transition:clip-path .5s cubic-bezier(.22,1,.36,1);overflow:hidden}
-.port-item:hover .img-wrap{clip-path:inset(2% 2% 2% 2% round 2rem)}
-.img-wrap img{transition:transform 1s ease,filter .5s}
-.port-item:hover .img-wrap img{transform:scale(1.08);filter:brightness(.92)}
+/* left photo panel */
+.hero-photo-panel {
+  position: relative;
+  overflow: hidden;
+  background: #e8e4df;
+}
+.hero-photo-panel::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #f0ece6 0%, #e2ddd6 100%);
+}
+.hero-photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 70%, var(--bg) 100%);
+  z-index: 2;
+}
+.hero-photo-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end; justify-content: center;
+  z-index: 1;
+}
+/* Placeholder photo area */
+.hero-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.hero-photo-placeholder img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  filter: grayscale(10%) contrast(1.05);
+}
+/* Big name watermark */
+.hero-name-bg {
+  position: absolute; bottom: 2rem; left: 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700; line-height: 1;
+  color: rgba(0,0,0,.06);
+  pointer-events: none; z-index: 3;
+  white-space: nowrap;
+}
 
-/* Overlay */
-.img-overlay{position:absolute;inset:0;background:rgba(218,41,28,0);transition:background .4s;display:flex;align-items:center;justify-content:center}
-.port-item:hover .img-overlay{background:rgba(218,41,28,.12)}
-.img-overlay-btn{opacity:0;transform:translateY(12px);transition:all .4s;background:#fff;color:#000;padding:.6rem 1.4rem;border-radius:999px;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
-.port-item:hover .img-overlay-btn{opacity:1;transform:none}
+/* Greeting badge */
+.hero-greeting {
+  position: absolute; top: 8rem; left: 2.5rem; z-index: 5;
+  background: white; border-radius: 999px;
+  padding: .5rem 1.2rem;
+  font-size: .7rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted);
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+  display: flex; align-items: center; gap: .5rem;
+  animation: floatBadge 4s ease-in-out infinite;
+}
+.hero-greeting::before {
+  content: '';
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 2s infinite;
+}
+@keyframes floatBadge {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,.4); }
+  50% { box-shadow: 0 0 0 6px transparent; }
+}
 
-/* Filter btn */
-.filter-btn{position:relative;overflow:hidden;padding:.4rem 0;font-size:.65rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;opacity:.35;transition:opacity .3s}
-.filter-btn::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;background:var(--accent);transition:all .3s;transform:translateX(-50%)}
-.filter-btn.active{opacity:1}
-.filter-btn.active::after{width:80%}
+/* right content */
+.hero-content {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6rem 4rem 4rem 5rem;
+  position: relative;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: var(--accent)/10;
+  background: rgba(218,41,28,.08);
+  color: var(--accent);
+  border-radius: 999px; padding: .4rem 1rem;
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .25em; text-transform: uppercase;
+  margin-bottom: 1.5rem; width: fit-content;
+}
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -.03em;
+  margin-bottom: .5rem;
+}
+.hero-name em {
+  font-style: italic;
+  color: var(--accent);
+  display: block;
+}
+.hero-role {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 300; color: var(--muted);
+  margin-bottom: 2rem; line-height: 1.5;
+}
+.hero-desc {
+  font-size: .95rem; line-height: 1.75;
+  color: #555; max-width: 480px;
+  margin-bottom: 3rem;
+}
 
-/* Timeline connector */
-.timeline-item{position:relative;padding-left:2rem}
-.timeline-item::before{content:'';position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.timeline-item:not(:last-child)::after{content:'';position:absolute;left:3.5px;top:20px;width:1px;height:calc(100% + 4rem);background:linear-gradient(to bottom,#DA291C,transparent)}
+/* Stats row */
+.hero-stats {
+  display: flex; gap: 2rem; margin-bottom: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 700;
+  color: var(--text); line-height: 1;
+}
+.stat-num span { color: var(--accent); }
+.stat-label {
+  font-size: .62rem; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); margin-top: .3rem;
+}
 
-/* Nav */
-#nav{transition:all .5s}
-#nav.scrolled{background:rgba(255,255,255,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding-top:.75rem;padding-bottom:.75rem;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+/* Social links */
+.hero-socials {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+}
+.social-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .6rem 1.2rem;
+  border-radius: 999px;
+  font-size: .7rem; font-weight: 600;
+  letter-spacing: .08em; text-decoration: none;
+  transition: all .3s; cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: white; color: var(--text);
+}
+.social-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(218,41,28,.12); }
+.social-btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+.social-btn.primary:hover { background: #c0201a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(218,41,28,.3); }
 
-/* Modal */
-#modal{position:fixed;inset:0;z-index:300;background:rgba(250,250,250,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .4s}
-#modal.open{opacity:1;pointer-events:all}
-#modal-card{background:#fff;border-radius:2.5rem;padding:2.5rem;max-width:900px;width:100%;display:flex;flex-wrap:wrap;gap:2rem;align-items:center;box-shadow:0 40px 120px rgba(0,0,0,.12);transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.16,1,.3,1)}
-#modal.open #modal-card{transform:none}
+/* ── SECTION SHARED ── */
+section { padding: 7rem 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+.section-eyebrow {
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: .75rem;
+}
+.section-eyebrow::before {
+  content: ''; display: block;
+  width: 28px; height: 1.5px; background: var(--accent);
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700; letter-spacing: -.03em;
+  line-height: 1.05; margin-bottom: 1.5rem;
+}
 
-/* Back to top */
-#btt{position:fixed;bottom:2.5rem;right:2.5rem;width:52px;height:52px;background:#171717;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(16px);transition:all .4s;z-index:100;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.2)}
-#btt.show{opacity:1;pointer-events:all;transform:none}
-#btt:hover{background:var(--accent)}
+/* ── ABOUT / PROFILE SECTION ── */
+#about { background: var(--bg2); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 5rem; align-items: center;
+}
+.about-img-wrap {
+  position: relative; border-radius: 2rem;
+  overflow: hidden; aspect-ratio: 3/4;
+  background: #e8e4df;
+}
+.about-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.about-img-badge {
+  position: absolute; bottom: 1.5rem; right: 1.5rem;
+  background: var(--accent); color: white;
+  border-radius: 1rem; padding: 1rem 1.2rem;
+  text-align: center; font-weight: 700;
+}
+.about-img-badge .big { font-size: 2rem; font-family: 'Playfair Display', serif; display: block; line-height: 1; }
+.about-img-badge .sm { font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; opacity: .85; }
+.about-text p {
+  font-size: 1rem; line-height: 1.85; color: #555; margin-bottom: 1.2rem;
+}
 
-/* Lang toggle */
-.lang-btn{font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;border:none;cursor:pointer;transition:all .3s}
-.lang-btn.active{background:var(--accent);color:#fff}
-.lang-btn.inactive{background:transparent;color:#9ca3af}
-.lang-btn.inactive:hover{color:#171717}
+/* Skills tags */
+.skills-cloud {
+  display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem;
+}
+.skill-tag {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .45rem 1rem;
+  border-radius: 999px; border: 1.5px solid var(--border);
+  font-size: .72rem; font-weight: 600; color: var(--text);
+  background: white;
+  transition: all .3s;
+  cursor: default;
+}
+.skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.skill-tag i { font-size: .8rem; }
 
-/* Stats bar */
-.stat-bar-bg{height:4px;border-radius:999px;background:#f0f0f0;overflow:hidden;margin-top:.4rem}
-.stat-bar-fill{height:100%;background:var(--accent);border-radius:999px;width:0%;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+/* ── SKILLS SECTION ── */
+#skills { background: var(--bg); }
+.skills-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.skill-card {
+  background: white; border-radius: 1.5rem;
+  padding: 2rem; border: 1px solid var(--border);
+  transition: all .4s cubic-bezier(.16,1,.3,1);
+  position: relative; overflow: hidden;
+}
+.skill-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s;
+}
+.skill-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,.07); }
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(218,41,28,.08);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.skill-card h4 {
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1.2rem;
+}
+.skill-tools { display: flex; flex-direction: column; gap: .6rem; }
+.skill-tool {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .5rem .75rem; border-radius: .75rem;
+  background: #f9f9f9; border: 1px solid rgba(0,0,0,.05);
+  font-size: .78rem; font-weight: 500; color: var(--text);
+  transition: background .2s;
+}
+.skill-tool:hover { background: rgba(218,41,28,.05); }
+.skill-tool i { font-size: .9rem; color: var(--accent); }
 
-/* Glow card */
-.glow-on-hover{position:relative}
-.glow-on-hover::before{content:'';position:absolute;inset:-1px;border-radius:inherit;background:conic-gradient(from var(--angle,0deg),transparent 70%,rgba(218,41,28,.4) 100%);opacity:0;transition:opacity .4s;z-index:-1}
-.glow-on-hover:hover::before{opacity:1;animation:spin 2s linear infinite}
-@keyframes spin{to{--angle:360deg}}
-@property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+/* ── PORTFOLIO ── */
+#portfolio { background: var(--bg2); }
+.port-filter {
+  display: flex; gap: 0; margin: 3rem 0 3rem;
+  background: #f0eeeb; border-radius: 999px;
+  padding: .3rem; width: fit-content;
+}
+.filter-btn {
+  padding: .55rem 1.4rem; border-radius: 999px;
+  border: none; background: transparent;
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  transition: all .3s;
+}
+.filter-btn.active {
+  background: white; color: var(--text);
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+}
+.port-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+.port-card {
+  border-radius: 1.5rem; overflow: hidden;
+  background: white; border: 1px solid var(--border);
+  transition: all .5s cubic-bezier(.16,1,.3,1);
+  position: relative;
+}
+.port-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,.1); }
+.port-img {
+  aspect-ratio: 16/10; overflow: hidden;
+  position: relative;
+}
+.port-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .8s cubic-bezier(.16,1,.3,1), filter .4s;
+}
+.port-card:hover .port-img img { transform: scale(1.07); filter: brightness(.92); }
+.port-overlay {
+  position: absolute; inset: 0;
+  background: rgba(218,41,28,0);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .4s;
+}
+.port-card:hover .port-overlay { background: rgba(218,41,28,.08); }
+.port-overlay-btn {
+  opacity: 0; transform: translateY(10px);
+  background: white; color: var(--text);
+  padding: .6rem 1.4rem; border-radius: 999px;
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  transition: all .4s;
+}
+.port-card:hover .port-overlay-btn { opacity: 1; transform: none; }
+.port-badge {
+  position: absolute; top: 1rem; left: 1rem;
+  background: white/90; background: rgba(255,255,255,.92);
+  backdrop-filter: blur(8px);
+  border-radius: 999px; padding: .3rem .8rem;
+  font-size: .6rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--text);
+}
+.port-info { padding: 1.5rem 2rem 2rem; }
+.port-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700;
+  margin-bottom: .5rem; letter-spacing: -.02em;
+}
+.port-info p { font-size: .85rem; color: var(--muted); line-height: 1.6; margin-bottom: .8rem; }
+.port-tags { display: flex; gap: .4rem; flex-wrap: wrap; }
+.port-tag {
+  font-size: .58rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--accent); background: rgba(218,41,28,.07);
+  padding: .25rem .6rem; border-radius: .4rem;
+}
+
+/* ── EXPERIENCE ── */
+#experience { background: var(--bg); }
+.exp-layout {
+  display: grid; grid-template-columns: 1fr 2fr;
+  gap: 5rem; margin-top: 3rem;
+}
+.exp-sidebar h3 {
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 2rem;
+}
+.exp-nav { display: flex; flex-direction: column; gap: .4rem; }
+.exp-nav-btn {
+  text-align: left; border: none;
+  background: none; padding: .8rem 1rem;
+  border-radius: .75rem; cursor: pointer;
+  font-size: .8rem; font-weight: 500;
+  color: var(--muted); transition: all .3s;
+  border-left: 2px solid transparent;
+}
+.exp-nav-btn.active {
+  color: var(--text);
+  background: white;
+  border-left-color: var(--accent);
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.exp-panels {}
+.exp-panel { display: none; }
+.exp-panel.active { display: block; animation: fadeSlide .4s ease; }
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: none; }
+}
+.exp-company {
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .75rem;
+}
+.exp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700;
+  letter-spacing: -.02em; margin-bottom: .5rem;
+}
+.exp-period {
+  font-size: .75rem; color: var(--muted);
+  font-weight: 500; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.exp-period::before {
+  content: ''; width: 20px; height: 1px;
+  background: var(--muted); display: block;
+}
+.exp-desc {
+  font-size: .95rem; line-height: 1.8; color: #555;
+  margin-bottom: 2rem;
+}
+.exp-chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+.exp-chip {
+  padding: .4rem .9rem; border-radius: 999px;
+  background: white; border: 1.5px solid var(--border);
+  font-size: .68rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text);
+}
+
+/* ── CONTACT / FOOTER ── */
+#contact {
+  background: #1a1a1a; color: white;
+  padding: 7rem 0 4rem;
+}
+.contact-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 5rem; align-items: center; margin-bottom: 5rem;
+}
+.contact-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -.03em; margin-bottom: 1.5rem;
+}
+.contact-title em { color: var(--accent2); font-style: italic; }
+.contact-desc { font-size: 1rem; color: rgba(255,255,255,.5); line-height: 1.8; }
+.contact-cta {
+  display: inline-flex; align-items: center; gap: 1rem;
+  margin-top: 2.5rem; background: var(--accent);
+  color: white; padding: 1rem 2rem; border-radius: 999px;
+  text-decoration: none; font-weight: 600;
+  font-size: .85rem; letter-spacing: .05em;
+  transition: all .3s;
+}
+.contact-cta:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(218,41,28,.35); }
+.contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+.contact-item { display: flex; flex-direction: column; gap: .3rem; }
+.contact-item-label {
+  font-size: .6rem; font-weight: 700;
+  letter-spacing: .25em; text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+.contact-item-val {
+  font-size: 1rem; font-weight: 500;
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  transition: color .3s;
+}
+a.contact-item-val:hover { color: var(--accent2); }
+.contact-socials { display: flex; gap: 1rem; margin-top: 2.5rem; }
+.soc-link {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; color: rgba(255,255,255,.5);
+  font-size: 1rem; transition: all .3s;
+}
+.soc-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding-top: 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .65rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: white; padding: 1.2rem 0;
+}
+.marquee-inner {
+  display: flex; gap: 0;
+  animation: marquee 28s linear infinite;
+  width: max-content;
+}
+.marquee-inner:hover { animation-play-state: paused; }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 1rem;
+  padding: 0 2.5rem;
+  font-size: .65rem; font-weight: 700;
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--muted); white-space: nowrap;
+}
+.marquee-dot { color: var(--accent); font-size: .5rem; }
+
+/* ── BACK TO TOP ── */
+#btt {
+  position: fixed; bottom: 2rem; right: 2rem;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--text); color: white; border: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 100; font-size: .9rem;
+  opacity: 0; pointer-events: none;
+  transform: translateY(16px); transition: all .4s;
+}
+#btt.show { opacity: 1; pointer-events: all; transform: none; }
+#btt:hover { background: var(--accent); transform: translateY(-2px); }
+
+/* ── LANG ── */
+.lang-wrap {
+  display: flex; background: rgba(0,0,0,.06);
+  border-radius: 999px; padding: .2rem;
+}
+.lang-btn {
+  padding: .3rem .75rem; border-radius: 999px;
+  border: none; cursor: pointer;
+  font-size: .6rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  transition: all .3s;
+}
+.lang-btn.active { background: var(--accent); color: white; }
+.lang-btn.inactive { background: transparent; color: var(--muted); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-photo-panel { height: 55vh; }
+  .hero-overlay { background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%); }
+  .hero-content { padding: 2rem 2rem 4rem; }
+  .skills-grid { grid-template-columns: repeat(2,1fr); }
+  .port-grid { grid-template-columns: 1fr; }
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .about-grid { grid-template-columns: 1fr; }
+  .exp-layout { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .container { padding: 0 1.5rem; }
+  .hero-name-bg { display: none; }
+}
 </style>
 </head>
-<body class="antialiased selection:bg-brand-500 selection:text-white">
+<body>
 
-<div id="cursor" class="hidden md:block"></div>
-<div id="cursor-trail" class="hidden md:block"></div>
+<div id="csr"></div>
+<div id="csr-ring"></div>
 <div id="prog"></div>
 
 <!-- NAV -->
-<header id="nav" class="fixed w-full z-50 px-6 py-6">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <a href="#" class="font-display font-bold text-2xl tracking-tighter magnetic">
-      HANDI<span class="text-brand-500">.</span>
-    </a>
-    <div class="flex items-center gap-5">
-      <nav class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-[.3em] mr-2">
-        <a href="#about" class="hover:text-brand-500 transition-colors" data-i18n="nav-about">Tentang</a>
-        <a href="#portfolio" class="hover:text-brand-500 transition-colors" data-i18n="nav-portfolio">Portofolio</a>
-        <a href="#exp" class="hover:text-brand-500 transition-colors" data-i18n="nav-exp">Pengalaman</a>
-        <a href="mailto:mfullstack.creative@gmail.com" class="hover:text-brand-500 transition-colors" data-i18n="nav-contact">Kontak</a>
-      </nav>
-      <div class="flex items-center gap-1 bg-white/60 backdrop-blur-sm rounded-full p-1 border border-zinc-200">
-        <button id="lang-id" onclick="setLang('id')" class="lang-btn active">ID</button>
-        <button id="lang-en" onclick="setLang('en')" class="lang-btn inactive">EN</button>
+<nav id="main-nav">
+  <a href="#" class="nav-logo">HANDI<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav-about">Tentang</a></li>
+    <li><a href="#portfolio" data-i18n="nav-port">Portofolio</a></li>
+    <li><a href="#experience" data-i18n="nav-exp">Pengalaman</a></li>
+    <li><a href="#contact" data-i18n="nav-contact">Kontak</a></li>
+  </ul>
+  <div class="lang-wrap">
+    <button class="lang-btn active" id="lb-id" onclick="setLang('id')">ID</button>
+    <button class="lang-btn inactive" id="lb-en" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+
+  <!-- LEFT: Photo -->
+  <div class="hero-photo-panel">
+    <div class="hero-greeting" data-i18n="greeting">Tersedia untuk kolaborasi</div>
+    <div class="hero-photo-placeholder">
+      <!-- Replace src below with your actual photo path e.g. ./assets/images/photo.jpg -->
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop&facepad=2&faces=1" alt="Handi Purnawan" onerror="this.style.background='#ddd'">
+    </div>
+    <div class="hero-photo-overlay"></div>
+    <div class="hero-name-bg">HANDI</div>
+  </div>
+
+  <!-- RIGHT: Content -->
+  <div class="hero-content">
+    <div class="hero-tag reveal" data-i18n="hero-tag">
+      <i class="fas fa-map-marker-alt" style="font-size:.7rem"></i>
+      Semarang, Jawa Tengah
+    </div>
+
+    <h1 class="hero-name reveal reveal-d1">
+      Handi
+      <em>Purnawan.</em>
+    </h1>
+
+    <p class="hero-role reveal reveal-d2" data-i18n="hero-role">Creative Technologist &amp; Multidisciplinary Designer</p>
+
+    <p class="hero-desc reveal reveal-d3" data-i18n="hero-desc">
+      Desainer multidisiplin yang fokus menghasilkan karya detail secara visual, namun tetap didukung sistem otomatis agar bisnis Anda berjalan lebih cepat dan efisien.
+    </p>
+
+    <div class="hero-stats reveal reveal-d3">
+      <div class="stat-item">
+        <div class="stat-num">10<span>+</span></div>
+        <div class="stat-label" data-i18n="stat-years">Tahun Pengalaman</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4<span>+</span></div>
+        <div class="stat-label" data-i18n="stat-projects">Proyek Unggulan</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" style="font-size:1.5rem">CSWP</div>
+        <div class="stat-label">Certified</div>
+      </div>
+    </div>
+
+    <div class="hero-socials reveal reveal-d4">
+      <a href="#portfolio" class="social-btn primary" data-i18n="btn-view">
+        <i class="fas fa-eye"></i> Lihat Portofolio
+      </a>
+      <a href="https://www.linkedin.com/in/handi-purnawan" target="_blank" class="social-btn">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="http://wa.me/628562588978" target="_blank" class="social-btn">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="mailto:mfullstack.creative@gmail.com" class="social-btn">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="http://instagram.com/handi.p" target="_blank" class="social-btn">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS MARQUEE ══ -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Photoshop <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Figma <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Canva <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Premiere Pro <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Solidworks CSWP <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">PHP / Laravel <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Google Apps Script <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">AI Prompting <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Capcut <span class="marquee-dot">✦</span></span>
+    <!-- duplicate for loop -->
+    <span class="marquee-item">Photoshop <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Figma <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Canva <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Premiere Pro <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Solidworks CSWP <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">PHP / Laravel <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Google Apps Script <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">AI Prompting <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Capcut <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-side reveal from-left">
+        <div class="about-img-wrap">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop" alt="Handi Purnawan" onerror="this.style.background='#e8e4df'">
+          <div class="about-img-badge">
+            <span class="big">10+</span>
+            <span class="sm" data-i18n="badge-years">Tahun</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal from-right">
+        <div class="section-eyebrow" data-i18n="about-eyebrow">Tentang Saya</div>
+        <h2 class="section-title" data-i18n="about-title">Creative Technologist<br><em style="font-style:italic; color:var(--muted)">yang serba bisa.</em></h2>
+        <p data-i18n="about-p1">Saya adalah desainer multidisiplin dengan lebih dari 10 tahun pengalaman menjaga identitas visual perusahaan. Mulai dari desain grafis, videografi, pemodelan 3D, hingga pengembangan web dan otomasi sistem.</p>
+        <p data-i18n="about-p2">Saat ini saya menjabat sebagai Creative Technologist di PT Sumber Harapan Mitra Perkasa — bertanggung jawab penuh atas kualitas desain pemasaran sekaligus membangun sistem digital yang membuat proses bisnis berjalan lebih efisien.</p>
+        <div class="skills-cloud">
+          <span class="skill-tag"><i class="fas fa-palette"></i> Photoshop</span>
+          <span class="skill-tag"><i class="fas fa-vector-square"></i> Figma</span>
+          <span class="skill-tag"><i class="fas fa-cube"></i> Solidworks</span>
+          <span class="skill-tag"><i class="fas fa-film"></i> Premiere Pro</span>
+          <span class="skill-tag"><i class="fas fa-code"></i> PHP Laravel</span>
+          <span class="skill-tag"><i class="fab fa-google"></i> Apps Script</span>
+          <span class="skill-tag"><i class="fas fa-robot"></i> AI Prompting</span>
+          <span class="skill-tag"><i class="fas fa-award"></i> CSWP Certified</span>
+        </div>
       </div>
     </div>
   </div>
-</header>
+</section>
 
-<!-- HERO -->
-<section id="about" class="min-h-screen flex items-center px-6 pt-24 relative overflow-hidden">
-  <div class="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-brand-500/10 rounded-full filter blur-3xl opacity-60 animate-float pointer-events-none"></div>
-  <div class="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-zinc-300/50 rounded-full filter blur-3xl opacity-50 animate-float-d pointer-events-none"></div>
-  <!-- Grid lines decoration -->
-  <div class="absolute inset-0 pointer-events-none" style="background-image:linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px);background-size:80px 80px"></div>
-
-  <div class="max-w-7xl mx-auto w-full relative z-10">
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <div class="container">
     <div class="reveal">
-      <div class="flex items-center gap-3 mb-8">
-        <div class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></div>
-        <span class="text-brand-500 font-bold tracking-[.35em] text-[10px] uppercase" data-i18n="hero-location">Semarang, Jawa Tengah</span>
-      </div>
-      <h1 class="text-[clamp(3rem,10vw,8.5rem)] font-display font-bold leading-[.88] tracking-tighter mb-14">
-        Creative<br>
-        <span class="italic text-zinc-200">Technologist.</span><br>
-        Handi<span class="text-brand-500"> Purnawan.</span>
-      </h1>
+      <div class="section-eyebrow" data-i18n="skills-eyebrow">Keahlian</div>
+      <h2 class="section-title" data-i18n="skills-title">Senjata saya.</h2>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-end reveal" style="transition-delay:200ms">
-      <div class="md:col-span-7">
-        <p class="text-xl md:text-2xl text-zinc-500 leading-relaxed font-light max-w-2xl" data-i18n="hero-desc">
-          Desainer multidisiplin yang fokus menghasilkan karya detail secara visual, namun tetap didukung sistem otomatis agar bisnis Anda berjalan lebih cepat.
-        </p>
-        <!-- Stat pills -->
-        <div class="flex flex-wrap gap-4 mt-8">
-          <div class="bg-zinc-50 border border-zinc-100 rounded-2xl px-5 py-3">
-            <p class="text-3xl font-display font-bold">10+</p>
-            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-1" data-i18n="stat-years">Tahun Pengalaman</p>
-          </div>
-          <div class="bg-zinc-50 border border-zinc-100 rounded-2xl px-5 py-3">
-            <p class="text-3xl font-display font-bold">4+</p>
-            <p class="text-[10px] text-zinc-400 uppercase tracking-widest mt-1" data-i18n="stat-projects">Proyek Unggulan</p>
-          </div>
-          <div class="bg-brand-500/5 border border-brand-500/10 rounded-2xl px-5 py-3">
-            <p class="text-3xl font-display font-bold text-brand-500">CSWP</p>
-            <p class="text-[10px] text-brand-500/60 uppercase tracking-widest mt-1">Certified</p>
-          </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal reveal-d1">
+        <div class="skill-icon"><i class="fas fa-palette"></i></div>
+        <h4 data-i18n="sk1">Desain Kreatif</h4>
+        <div class="skill-tools">
+          <div class="skill-tool"><i class="fab fa-adobe"></i> Photoshop</div>
+          <div class="skill-tool"><i class="fas fa-vector-square"></i> Figma</div>
+          <div class="skill-tool"><i class="fas fa-paint-brush"></i> Canva</div>
         </div>
       </div>
-      <div class="md:col-span-5 flex md:justify-end">
-        <a href="#portfolio" class="magnetic group inline-flex items-center gap-5 px-8 py-4 bg-zinc-900 text-white rounded-full hover:bg-brand-500 transition-all duration-300">
-          <span class="text-xs font-bold uppercase tracking-widest" data-i18n="btn-view">Lihat Portofolio</span>
-          <div class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-            <i class="fas fa-arrow-right text-xs"></i>
-          </div>
-        </a>
+      <div class="skill-card reveal reveal-d2">
+        <div class="skill-icon"><i class="fas fa-film"></i></div>
+        <h4 data-i18n="sk2">Videografi</h4>
+        <div class="skill-tools">
+          <div class="skill-tool"><i class="fas fa-clapperboard"></i> Premiere Pro</div>
+          <div class="skill-tool"><i class="fas fa-video"></i> Capcut</div>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d3">
+        <div class="skill-icon"><i class="fas fa-cube"></i></div>
+        <h4 data-i18n="sk3">Pemodelan 3D</h4>
+        <div class="skill-tools">
+          <div class="skill-tool"><i class="fas fa-drafting-compass"></i> Solidworks</div>
+          <div class="skill-tool" style="background:rgba(218,41,28,.05); border-color:rgba(218,41,28,.15); color:var(--accent)"><i class="fas fa-award"></i> CSWP Certified</div>
+        </div>
+      </div>
+      <div class="skill-card reveal reveal-d4">
+        <div class="skill-icon"><i class="fas fa-robot"></i></div>
+        <h4 data-i18n="sk4">Web & AI</h4>
+        <div class="skill-tools">
+          <div class="skill-tool"><i class="fas fa-robot"></i> AI Prompting</div>
+          <div class="skill-tool"><i class="fas fa-code"></i> PHP / Laravel</div>
+          <div class="skill-tool"><i class="fab fa-google"></i> Apps Script</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SKILLS MARQUEE -->
-<div class="py-8 border-y border-zinc-100 overflow-hidden bg-zinc-50/60">
-  <div class="marquee-inner text-[10px] font-bold uppercase tracking-[.3em] text-zinc-400">
-    <span class="px-8">Photoshop</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Figma</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Canva</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Premiere Pro</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Solidworks CSWP</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">PHP / Laravel</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Google Apps Script</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">AI Prompting</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Capcut</span><span class="text-brand-500 px-2">✦</span>
-    <!-- duplicate for seamless loop -->
-    <span class="px-8">Photoshop</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Figma</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Canva</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Premiere Pro</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Solidworks CSWP</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">PHP / Laravel</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Google Apps Script</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">AI Prompting</span><span class="text-brand-500 px-2">✦</span>
-    <span class="px-8">Capcut</span><span class="text-brand-500 px-2">✦</span>
-  </div>
-</div>
+<!-- ══ PORTFOLIO ══ -->
+<section id="portfolio">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow" data-i18n="port-eyebrow">Karya Terpilih</div>
+      <h2 class="section-title" data-i18n="port-title">Portofolio.</h2>
+    </div>
+    <div class="port-filter reveal">
+      <button class="filter-btn active" onclick="filterPort('all')" data-i18n="f-all">Semua</button>
+      <button class="filter-btn" onclick="filterPort('visual')" data-i18n="f-visual">Visual & Video</button>
+      <button class="filter-btn" onclick="filterPort('3d')" data-i18n="f-3d">3D & Teknis</button>
+      <button class="filter-btn" onclick="filterPort('system')" data-i18n="f-sys">Sistem Web</button>
+    </div>
+    <div class="port-grid" id="pgrid">
 
-<!-- SKILLS GRID -->
-<section class="py-24 px-6 bg-white">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
-
-      <div class="skill-card bg-zinc-50 border border-zinc-100 rounded-3xl p-6 glow-on-hover">
-        <div class="w-10 h-10 bg-brand-500/10 rounded-xl flex items-center justify-center mb-5">
-          <i class="fas fa-palette text-brand-500"></i>
+      <div class="port-card reveal" data-cat="visual">
+        <div class="port-img">
+          <img src="./assets/images/portfolio-visual.jpg" alt="Visual Design" onerror="this.src='https://images.unsplash.com/photo-1626785776965-4c5151cbb00f?q=80&w=800'">
+          <div class="port-overlay"><div class="port-overlay-btn" data-i18n="btn-detail">Lihat Detail</div></div>
+          <div class="port-badge">Visual & Video</div>
         </div>
-        <h4 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-4" data-i18n="skill-design">Desain Kreatif</h4>
-        <div class="flex flex-col gap-3">
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="devicon-photoshop-plain colored text-lg"></i><span class="text-xs font-semibold text-zinc-700">Photoshop</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="devicon-figma-plain colored text-lg"></i><span class="text-xs font-semibold text-zinc-700">Figma</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="devicon-canva-original colored text-lg"></i><span class="text-xs font-semibold text-zinc-700">Canva</span>
-          </div>
+        <div class="port-info">
+          <h3 data-i18n="p1t">Desain Promosi & Media Sosial</h3>
+          <p data-i18n="p1d">Pembuatan materi promosi cetak dan digital menggunakan Photoshop untuk detail tinggi, dan Canva untuk pekerjaan yang cepat.</p>
+          <div class="port-tags"><span class="port-tag">Photoshop</span><span class="port-tag">Canva</span><span class="port-tag">Figma</span></div>
         </div>
       </div>
 
-      <div class="skill-card bg-zinc-50 border border-zinc-100 rounded-3xl p-6 glow-on-hover">
-        <div class="w-10 h-10 bg-brand-500/10 rounded-xl flex items-center justify-center mb-5">
-          <i class="fas fa-film text-brand-500"></i>
+      <div class="port-card reveal reveal-d1" data-cat="3d">
+        <div class="port-img">
+          <img src="./assets/images/portfolio-3d.jpg" alt="3D Wheel Design" onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800'">
+          <div class="port-overlay"><div class="port-overlay-btn" data-i18n="btn-detail">Lihat Detail</div></div>
+          <div class="port-badge">3D & Teknis</div>
         </div>
-        <h4 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-4" data-i18n="skill-video">Videografi</h4>
-        <div class="flex flex-col gap-3">
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="devicon-premierepro-plain colored text-lg"></i><span class="text-xs font-semibold text-zinc-700">Premiere Pro</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="fas fa-video text-zinc-700 text-sm"></i><span class="text-xs font-semibold text-zinc-700">Capcut</span>
-          </div>
+        <div class="port-info">
+          <h3 data-i18n="p2t">Desain Velg 3D (Solidworks)</h3>
+          <p data-i18n="p2d">Merancang gambar teknik dan bentuk 3D velg kendaraan yang akurat dan siap diproduksi secara massal.</p>
+          <div class="port-tags"><span class="port-tag">Solidworks</span><span class="port-tag">CSWP</span></div>
         </div>
       </div>
 
-      <div class="skill-card bg-zinc-50 border border-zinc-100 rounded-3xl p-6 glow-on-hover">
-        <div class="w-10 h-10 bg-brand-500/10 rounded-xl flex items-center justify-center mb-5">
-          <i class="fas fa-cube text-brand-500"></i>
+      <div class="port-card reveal" data-cat="system">
+        <div class="port-img">
+          <img src="./assets/images/portfolio-web.jpg" alt="Web System" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800'">
+          <div class="port-overlay"><div class="port-overlay-btn" data-i18n="btn-detail">Lihat Detail</div></div>
+          <div class="port-badge">Sistem Web</div>
         </div>
-        <h4 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-4" data-i18n="skill-3d">Pemodelan 3D</h4>
-        <div class="flex flex-col gap-3">
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="devicon-solidworks-plain colored text-lg"></i><span class="text-xs font-semibold text-zinc-700">Solidworks</span>
-          </div>
-          <div class="flex items-center gap-3 bg-brand-500/5 border border-brand-500/15 rounded-xl px-3 py-2.5">
-            <i class="fas fa-award text-brand-500 text-sm"></i><span class="text-xs font-semibold text-brand-600">CSWP Certified</span>
-          </div>
+        <div class="port-info">
+          <h3 data-i18n="p3t">Website BOP & E-Garansi</h3>
+          <p data-i18n="p3d">Pembuatan website fungsional dan integrasi E-Garansi sesuai kebutuhan perusahaan.</p>
+          <div class="port-tags"><span class="port-tag">PHP Laravel</span><span class="port-tag">AI</span></div>
         </div>
       </div>
 
-      <div class="skill-card bg-zinc-50 border border-zinc-100 rounded-3xl p-6 glow-on-hover">
-        <div class="w-10 h-10 bg-brand-500/10 rounded-xl flex items-center justify-center mb-5">
-          <i class="fas fa-robot text-brand-500"></i>
+      <div class="port-card reveal reveal-d1" data-cat="system">
+        <div class="port-img">
+          <img src="./assets/images/portfolio-evoucher.jpg" alt="E-Voucher" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800'">
+          <div class="port-overlay"><div class="port-overlay-btn" data-i18n="btn-detail">Lihat Detail</div></div>
+          <div class="port-badge">Sistem Web</div>
         </div>
-        <h4 class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-4" data-i18n="skill-tech">Web & AI</h4>
-        <div class="flex flex-col gap-3">
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="fas fa-robot text-brand-500 text-sm"></i><span class="text-xs font-semibold text-zinc-700">AI Prompting</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="devicon-php-plain colored text-lg"></i><span class="text-xs font-semibold text-zinc-700">PHP / Laravel</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white border border-zinc-100 rounded-xl px-3 py-2.5 shadow-sm">
-            <i class="fab fa-google text-blue-500 text-sm"></i><span class="text-xs font-semibold text-zinc-700">Apps Script</span>
-          </div>
+        <div class="port-info">
+          <h3 data-i18n="p4t">Sistem Otomatis E-Voucher</h3>
+          <p data-i18n="p4d">Menciptakan program yang secara otomatis mengirimkan voucher ke pelanggan untuk menghindari salah ketik dari admin.</p>
+          <div class="port-tags"><span class="port-tag">Google Script</span><span class="port-tag">Automation</span></div>
         </div>
       </div>
 
@@ -289,155 +906,43 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overf
   </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio" class="py-32 px-6 bg-zinc-50/50">
-  <div class="max-w-7xl mx-auto">
-
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 reveal">
-      <div>
-        <span class="text-brand-500 font-bold uppercase tracking-[.35em] text-[10px] mb-3 block" data-i18n="port-label">Karya Terpilih</span>
-        <h2 class="text-5xl md:text-6xl font-display font-bold tracking-tight" data-i18n="port-title">Portofolio.</h2>
-      </div>
-      <!-- Filter -->
-      <div class="flex flex-wrap gap-8">
-        <button onclick="filterPort('all')" class="filter-btn active" data-i18n="filter-all">Semua</button>
-        <button onclick="filterPort('visual')" class="filter-btn" data-i18n="filter-visual">Visual & Video</button>
-        <button onclick="filterPort('3d')" class="filter-btn" data-i18n="filter-3d">3D & Teknis</button>
-        <button onclick="filterPort('system')" class="filter-btn" data-i18n="filter-system">Sistem Web</button>
-      </div>
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow" data-i18n="exp-eyebrow">Track Record</div>
+      <h2 class="section-title" data-i18n="exp-title">Pengalaman.</h2>
     </div>
-
-    <div id="pgrid" class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-20 relative">
-
-      <!-- Item 1 -->
-      <div class="port-item reveal" data-cat="visual">
-        <div class="hidden modal-data">
-          <span class="mt" data-i18n="p1mt">Desain Materi Promosi</span>
-          <span class="md" data-i18n="p1md">Pembuatan aset desain untuk kebutuhan promosi. Menggunakan Photoshop untuk memberikan sentuhan detail visual yang presisi (seperti manipulasi foto), dipadukan dengan Canva untuk memastikan produksi konten media sosial harian berjalan cepat dan efisien tanpa menurunkan kualitas.</span>
-          <span class="mc">PHOTOSHOP &bull; CANVA &bull; FIGMA</span>
-        </div>
-        <div class="img-wrap relative aspect-[4/5] bg-zinc-100 cursor-pointer" onclick="openModal('./assets/images/portfolio-visual.jpg',this)">
-          <img src="./assets/images/portfolio-visual.jpg" class="w-full h-full object-cover" alt="Visual Design" onerror="this.src='https://images.unsplash.com/photo-1626785776965-4c5151cbb00f?q=80&w=800'">
-          <div class="img-overlay">
-            <div class="img-overlay-btn" data-i18n="btn-detail">Lihat Detail</div>
-          </div>
-          <!-- Category badge -->
-          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-zinc-600">Visual & Video</div>
-        </div>
-        <div class="mt-7">
-          <h3 class="text-2xl md:text-3xl font-display font-bold tracking-tight mb-3" data-i18n="p1t">Desain Promosi & Media Sosial</h3>
-          <p class="text-zinc-500 font-light text-sm leading-relaxed mb-4" data-i18n="p1d">Pembuatan materi promosi cetak dan digital menggunakan Photoshop untuk detail tinggi, dan Canva untuk pekerjaan yang cepat.</p>
-          <span class="text-[9px] font-bold uppercase tracking-[.2em] text-brand-500">PHOTOSHOP &bull; CANVA &bull; FIGMA</span>
+    <div class="exp-layout">
+      <div class="exp-sidebar reveal from-left">
+        <h3 data-i18n="exp-nav-label">Pilih Posisi</h3>
+        <div class="exp-nav">
+          <button class="exp-nav-btn active" onclick="showExp(0)">Creative Technologist</button>
+          <button class="exp-nav-btn" onclick="showExp(1)" data-i18n="exp2-nav">IT Desainer Grafis</button>
         </div>
       </div>
-
-      <!-- Item 2 -->
-      <div class="port-item reveal" data-cat="3d" style="transition-delay:100ms">
-        <div class="hidden modal-data">
-          <span class="mt" data-i18n="p2mt">Inovasi Desain Velg 3D</span>
-          <span class="md" data-i18n="p2md">Membuat pemodelan 3D velg mobil yang inovatif menggunakan perangkat lunak Solidworks. Desain ini dibuat presisi agar siap untuk tahapan produksi pabrik.</span>
-          <span class="mc">SOLIDWORKS &bull; CSWP CERTIFIED</span>
-        </div>
-        <div class="img-wrap relative aspect-[4/5] bg-zinc-100 cursor-pointer" onclick="openModal('./assets/images/portfolio-3d.jpg',this)">
-          <img src="./assets/images/portfolio-3d.jpg" class="w-full h-full object-cover" alt="3D Wheel" onerror="this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800'">
-          <div class="img-overlay">
-            <div class="img-overlay-btn" data-i18n="btn-detail">Lihat Detail</div>
-          </div>
-          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-zinc-600">3D & Teknis</div>
-        </div>
-        <div class="mt-7">
-          <h3 class="text-2xl md:text-3xl font-display font-bold tracking-tight mb-3" data-i18n="p2t">Desain Velg 3D (Solidworks)</h3>
-          <p class="text-zinc-500 font-light text-sm leading-relaxed mb-4" data-i18n="p2d">Merancang gambar teknik dan bentuk 3D velg kendaraan yang akurat dan siap diproduksi secara massal.</p>
-          <span class="text-[9px] font-bold uppercase tracking-[.2em] text-brand-500">SOLIDWORKS &bull; CSWP CERTIFIED</span>
-        </div>
-      </div>
-
-      <!-- Item 3 -->
-      <div class="port-item reveal" data-cat="system">
-        <div class="hidden modal-data">
-          <span class="mt" data-i18n="p3mt">Website BOP & E-Garansi</span>
-          <span class="md" data-i18n="p3md">Fokus pada pembuatan dan pengembangan website, dilengkapi dengan menu integrasi E-Garansi untuk layanan pelanggan. Proses pengerjaan kode dibantu oleh AI agar lebih efisien dan stabil.</span>
-          <span class="mc">PHP LARAVEL &bull; AI IMPLEMENTATION</span>
-        </div>
-        <div class="img-wrap relative aspect-[4/5] bg-zinc-100 cursor-pointer" onclick="openModal('./assets/images/portfolio-web.jpg',this)">
-          <img src="./assets/images/portfolio-web.jpg" class="w-full h-full object-cover" alt="Web System" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800'">
-          <div class="img-overlay">
-            <div class="img-overlay-btn" data-i18n="btn-detail">Lihat Detail</div>
-          </div>
-          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-zinc-600">Sistem Web</div>
-        </div>
-        <div class="mt-7">
-          <h3 class="text-2xl md:text-3xl font-display font-bold tracking-tight mb-3" data-i18n="p3t">Website BOP & E-Garansi</h3>
-          <p class="text-zinc-500 font-light text-sm leading-relaxed mb-4" data-i18n="p3d">Pembuatan website fungsional dan integrasi E-Garansi sesuai kebutuhan perusahaan.</p>
-          <span class="text-[9px] font-bold uppercase tracking-[.2em] text-brand-500">PHP LARAVEL &bull; AI IMPLEMENTATION</span>
-        </div>
-      </div>
-
-      <!-- Item 4 -->
-      <div class="port-item reveal" data-cat="system" style="transition-delay:100ms">
-        <div class="hidden modal-data">
-          <span class="mt" data-i18n="p4mt">Sistem Otomatis E-Voucher</span>
-          <span class="md" data-i18n="p4md">Mengganti cara kerja manual yang rentan salah ketik menjadi sistem otomatis. Sistem ini bertugas mendistribusikan voucher digital ke pelanggan menggunakan kode Google Apps Script secara otomatis.</span>
-          <span class="mc">GOOGLE SCRIPT &bull; AUTOMATION</span>
-        </div>
-        <div class="img-wrap relative aspect-[4/5] bg-zinc-100 cursor-pointer" onclick="openModal('./assets/images/portfolio-evoucher.jpg',this)">
-          <img src="./assets/images/portfolio-evoucher.jpg" class="w-full h-full object-cover" alt="E-Voucher" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800'">
-          <div class="img-overlay">
-            <div class="img-overlay-btn" data-i18n="btn-detail">Lihat Detail</div>
-          </div>
-          <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-zinc-600">Sistem Web</div>
-        </div>
-        <div class="mt-7">
-          <h3 class="text-2xl md:text-3xl font-display font-bold tracking-tight mb-3" data-i18n="p4t">Sistem Otomatis E-Voucher</h3>
-          <p class="text-zinc-500 font-light text-sm leading-relaxed mb-4" data-i18n="p4d">Menciptakan program yang secara otomatis mengirimkan voucher ke pelanggan untuk menghindari salah ketik dari admin.</p>
-          <span class="text-[9px] font-bold uppercase tracking-[.2em] text-brand-500">GOOGLE SCRIPT &bull; AUTOMATION</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="exp" class="py-32 px-6 bg-white">
-  <div class="max-w-7xl mx-auto">
-    <div class="reveal mb-16">
-      <span class="text-brand-500 font-bold uppercase tracking-[.35em] text-[10px] mb-3 block" data-i18n="exp-label">Track Record</span>
-      <h2 class="text-5xl md:text-6xl font-display font-bold tracking-tight" data-i18n="exp-title">Pengalaman.</h2>
-    </div>
-    <div class="space-y-16">
-      <div class="timeline-item reveal">
-        <div class="bg-zinc-50 border border-zinc-100 rounded-3xl p-8 hover:border-brand-500/20 hover:shadow-lg transition-all duration-500">
-          <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
-            <div>
-              <h3 class="text-2xl md:text-3xl font-display font-bold">Creative Technologist</h3>
-              <p class="text-zinc-400 mt-1 text-xs font-bold uppercase tracking-widest">PT Sumber Harapan Mitra Perkasa</p>
-            </div>
-            <span class="bg-brand-500/10 text-brand-600 rounded-full px-4 py-1.5 text-[9px] font-bold uppercase tracking-widest whitespace-nowrap" data-i18n="exp-d1">2024 — Sekarang</span>
-          </div>
-          <p class="text-zinc-500 leading-relaxed text-sm" data-i18n="exp-desc1">Bertanggung jawab penuh atas kualitas desain pemasaran perusahaan, merangkap pekerjaan IT dengan membuat website sistem operasional (BOP) dan otomasi voucher agar proses bisnis berjalan ringkas.</p>
-          <div class="flex flex-wrap gap-2 mt-6">
-            <span class="bg-white border border-zinc-200 rounded-lg px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">Design</span>
-            <span class="bg-white border border-zinc-200 rounded-lg px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">Web Dev</span>
-            <span class="bg-white border border-zinc-200 rounded-lg px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">Automation</span>
-            <span class="bg-white border border-zinc-200 rounded-lg px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">AI</span>
+      <div class="exp-panels reveal from-right">
+        <div class="exp-panel active" id="exp-0">
+          <div class="exp-company">PT Sumber Harapan Mitra Perkasa</div>
+          <div class="exp-title">Creative Technologist</div>
+          <div class="exp-period" data-i18n="exp1-period">2024 — Sekarang</div>
+          <p class="exp-desc" data-i18n="exp1-desc">Bertanggung jawab penuh atas kualitas desain pemasaran perusahaan, merangkap pekerjaan IT dengan membuat website sistem operasional (BOP) dan otomasi voucher agar proses bisnis berjalan ringkas dan efisien.</p>
+          <div class="exp-chips">
+            <span class="exp-chip">Design</span>
+            <span class="exp-chip">Web Dev</span>
+            <span class="exp-chip">Automation</span>
+            <span class="exp-chip">AI</span>
           </div>
         </div>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="bg-zinc-50 border border-zinc-100 rounded-3xl p-8 hover:border-zinc-200 hover:shadow-lg transition-all duration-500">
-          <div class="flex flex-wrap items-start justify-between gap-4 mb-5">
-            <div>
-              <h3 class="text-2xl md:text-3xl font-display font-bold">IT Desainer Grafis</h3>
-              <p class="text-zinc-400 mt-1 text-xs font-bold uppercase tracking-widest">PT Arvia Jaya</p>
-            </div>
-            <span class="bg-zinc-100 text-zinc-500 rounded-full px-4 py-1.5 text-[9px] font-bold uppercase tracking-widest whitespace-nowrap">2013 — 2024</span>
-          </div>
-          <p class="text-zinc-500 leading-relaxed text-sm" data-i18n="exp-desc2">Berpengalaman lebih dari 10 tahun dalam menjaga identitas visual perusahaan, mulai dari merancang brosur, membuat pemodelan 3D velg kendaraan, hingga memberikan dukungan IT ringan.</p>
-          <div class="flex flex-wrap gap-2 mt-6">
-            <span class="bg-white border border-zinc-200 rounded-lg px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">Graphic Design</span>
-            <span class="bg-white border border-zinc-200 rounded-lg px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">3D Modeling</span>
-            <span class="bg-white border border-zinc-200 rounded-lg px-3 py-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">IT Support</span>
+        <div class="exp-panel" id="exp-1">
+          <div class="exp-company">PT Arvia Jaya</div>
+          <div class="exp-title" data-i18n="exp2-title">IT Desainer Grafis</div>
+          <div class="exp-period">2013 — 2024</div>
+          <p class="exp-desc" data-i18n="exp2-desc">Berpengalaman lebih dari 10 tahun dalam menjaga identitas visual perusahaan, mulai dari merancang brosur, membuat pemodelan 3D velg kendaraan, hingga memberikan dukungan IT ringan.</p>
+          <div class="exp-chips">
+            <span class="exp-chip">Graphic Design</span>
+            <span class="exp-chip">3D Modeling</span>
+            <span class="exp-chip">IT Support</span>
           </div>
         </div>
       </div>
@@ -445,194 +950,189 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overf
   </div>
 </section>
 
-<!-- FOOTER / CTA -->
-<footer class="py-32 bg-zinc-950 text-white overflow-hidden relative">
-  <!-- Big BG text -->
-  <div class="absolute top-0 left-0 w-full opacity-[.03] pointer-events-none select-none overflow-hidden">
-    <p class="text-[15vw] font-display font-bold tracking-tighter whitespace-nowrap leading-none -translate-x-10">CREATIVE TECHNOLOGIST</p>
-  </div>
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<!-- ══ CONTACT / FOOTER ══ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
       <div class="reveal">
-        <span class="text-brand-500 font-bold uppercase tracking-[.35em] text-[10px] mb-4 block" data-i18n="footer-cta-label">Mari Berkolaborasi</span>
-        <h2 class="text-4xl md:text-6xl font-display font-bold tracking-tighter mb-10" data-i18n="footer-title">Siap berkolaborasi<br>bersama Anda.</h2>
-        <a href="mailto:mfullstack.creative@gmail.com" class="group inline-flex items-center gap-4 text-lg md:text-2xl font-light hover:text-brand-500 transition-colors border-b border-white/15 pb-2">
-          mfullstack.creative@gmail.com
-          <i class="fas fa-arrow-right text-sm group-hover:translate-x-2 transition-transform"></i>
+        <h2 class="contact-title" data-i18n="contact-title">Siap berkolaborasi<br><em>bersama Anda.</em></h2>
+        <p class="contact-desc" data-i18n="contact-desc">Punya proyek menarik? Mari kita diskusikan dan wujudkan bersama. Saya terbuka untuk kolaborasi freelance maupun full-time.</p>
+        <a href="mailto:mfullstack.creative@gmail.com" class="contact-cta">
+          <i class="fas fa-paper-plane"></i>
+          <span data-i18n="contact-btn">Kirim Pesan</span>
         </a>
       </div>
-      <div class="flex flex-col md:items-end gap-8 reveal" style="transition-delay:150ms">
-        <div class="text-right">
-          <p class="text-zinc-500 text-xs uppercase tracking-widest mb-1" data-i18n="footer-loc">Semarang, Indonesia</p>
-          <p class="font-medium">+62 856 258 8978</p>
+      <div class="contact-info reveal reveal-d2">
+        <div class="contact-item">
+          <span class="contact-item-label">Email</span>
+          <a href="mailto:mfullstack.creative@gmail.com" class="contact-item-val">mfullstack.creative@gmail.com</a>
         </div>
-        <div class="flex gap-6">
-          <a href="https://www.linkedin.com/in/handi-purnawan" class="magnetic text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-            <i class="fab fa-linkedin text-sm"></i> LinkedIn
-          </a>
-          <a href="http://instagram.com/handi.p" class="magnetic text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-            <i class="fab fa-instagram text-sm"></i> Instagram
-          </a>
-          <a href="http://wa.me/628562588978" class="magnetic text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-colors flex items-center gap-2">
-            <i class="fab fa-whatsapp text-sm"></i> WhatsApp
-          </a>
+        <div class="contact-item">
+          <span class="contact-item-label">WhatsApp</span>
+          <a href="http://wa.me/628562588978" class="contact-item-val">+62 856 258 8978</a>
         </div>
-        <p class="text-zinc-600 text-[9px] uppercase tracking-widest">&copy; 2026 HANDI PURNAWAN. ALL RIGHTS RESERVED.</p>
+        <div class="contact-item">
+          <span class="contact-item-label" data-i18n="loc-label">Lokasi</span>
+          <span class="contact-item-val">Semarang, Jawa Tengah</span>
+        </div>
+        <div class="contact-socials">
+          <a href="https://www.linkedin.com/in/handi-purnawan" class="soc-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="http://instagram.com/handi.p" class="soc-link" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="http://wa.me/628562588978" class="soc-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="mailto:mfullstack.creative@gmail.com" class="soc-link"><i class="fas fa-envelope"></i></a>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
-
-<!-- MODAL -->
-<div id="modal" onclick="closeModal(event)">
-  <div id="modal-card">
-    <button onclick="closeModal()" style="position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#9ca3af;transition:color .2s" onmouseover="this.style.color='#DA291C'" onmouseout="this.style.color='#9ca3af'">
-      <i class="fas fa-times"></i>
-    </button>
-    <div id="modal-img" style="flex:1;min-width:240px;max-width:400px"></div>
-    <div style="flex:1;min-width:240px">
-      <span class="text-brand-500 font-bold uppercase tracking-widest text-[10px] mb-4 block" data-i18n="modal-label">Detail Proyek</span>
-      <h3 id="modal-title" class="font-display font-bold tracking-tight mb-5" style="font-size:clamp(1.5rem,3vw,2.5rem);line-height:1.1;color:#171717"></h3>
-      <p id="modal-desc" class="text-zinc-500 font-light leading-relaxed mb-2" style="font-size:.95rem"></p>
-      <p id="modal-cat" class="text-[9px] font-bold uppercase tracking-[.2em] text-brand-500 mb-8"></p>
-      <a href="mailto:mfullstack.creative@gmail.com" class="inline-flex items-center gap-3 px-7 py-3.5 bg-zinc-900 text-white rounded-full text-xs font-bold uppercase tracking-widest hover:bg-brand-500 transition-all" data-i18n="modal-btn">Diskusikan Proyek</a>
+    <div class="footer-bottom reveal">
+      <span>&copy; 2026 HANDI PURNAWAN. ALL RIGHTS RESERVED.</span>
+      <span>CREATIVE TECHNOLOGIST</span>
     </div>
   </div>
-</div>
+</section>
 
-<!-- BACK TO TOP -->
-<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Kembali ke atas">
-  <i class="fas fa-arrow-up text-sm"></i>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <i class="fas fa-arrow-up"></i>
 </button>
 
 <script>
-// i18n
-const T={
-id:{
-  "nav-about":"Tentang","nav-portfolio":"Portofolio","nav-exp":"Pengalaman","nav-contact":"Kontak",
-  "hero-location":"Semarang, Jawa Tengah",
-  "hero-desc":"Desainer multidisiplin yang fokus menghasilkan karya detail secara visual, namun tetap didukung sistem otomatis agar bisnis Anda berjalan lebih cepat.",
-  "btn-view":"Lihat Portofolio","stat-years":"Tahun Pengalaman","stat-projects":"Proyek Unggulan",
-  "skill-design":"Desain Kreatif","skill-video":"Videografi","skill-3d":"Pemodelan 3D","skill-tech":"Web & AI",
-  "port-label":"Karya Terpilih","port-title":"Portofolio.",
-  "filter-all":"Semua","filter-visual":"Visual & Video","filter-3d":"3D & Teknis","filter-system":"Sistem Web",
-  "p1t":"Desain Promosi & Media Sosial","p1d":"Pembuatan materi promosi cetak dan digital menggunakan Photoshop untuk detail tinggi, dan Canva untuk pekerjaan yang cepat.","p1mt":"Desain Materi Promosi","p1md":"Pembuatan aset desain untuk kebutuhan promosi. Menggunakan Photoshop untuk memberikan sentuhan detail visual yang presisi, dipadukan dengan Canva untuk memastikan produksi konten media sosial harian berjalan cepat dan efisien.","btn-detail":"Lihat Detail",
-  "p2t":"Desain Velg 3D (Solidworks)","p2d":"Merancang gambar teknik dan bentuk 3D velg kendaraan yang akurat dan siap diproduksi secara massal.","p2mt":"Inovasi Desain Velg 3D","p2md":"Membuat pemodelan 3D velg mobil yang inovatif menggunakan Solidworks. Desain dibuat presisi agar siap untuk tahapan produksi pabrik.",
-  "p3t":"Website Sistem BOP & E-Garansi","p3d":"Pembuatan website fungsional khusus untuk sistem BOP dan integrasi E-Garansi.","p3mt":"Website Sistem BOP & E-Garansi","p3md":"Fokus pada pembuatan dan pengembangan website untuk mendigitalisasi pencatatan Biaya Operasional (BOP) harian, dilengkapi dengan menu integrasi E-Garansi untuk layanan pelanggan.",
-  "p4t":"Sistem Otomatis E-Voucher","p4d":"Menciptakan program yang secara otomatis mengirimkan voucher ke pelanggan untuk menghindari salah ketik dari admin.","p4mt":"Sistem Otomatis E-Voucher","p4md":"Mengganti cara kerja manual yang rentan salah ketik menjadi sistem otomatis menggunakan Google Apps Script.",
-  "exp-label":"Track Record","exp-title":"Pengalaman.","exp-d1":"2024 — Sekarang",
-  "exp-desc1":"Bertanggung jawab penuh atas kualitas desain pemasaran perusahaan, merangkap pekerjaan IT dengan membuat website sistem operasional (BOP) dan otomasi voucher agar proses bisnis berjalan ringkas.",
-  "exp-desc2":"Berpengalaman lebih dari 10 tahun dalam menjaga identitas visual perusahaan, mulai dari merancang brosur, membuat pemodelan 3D velg kendaraan, hingga memberikan dukungan IT ringan.",
-  "footer-cta-label":"Mari Berkolaborasi","footer-title":"Siap berkolaborasi<br>bersama Anda.","footer-loc":"Semarang, Indonesia",
-  "modal-label":"Detail Proyek","modal-btn":"Diskusikan Proyek"
-},
-en:{
-  "nav-about":"About","nav-portfolio":"Portfolio","nav-exp":"Experience","nav-contact":"Contact",
-  "hero-location":"Based in Semarang, Central Java",
-  "hero-desc":"Multidisciplinary designer focused on producing visually detailed work, backed by automated systems to make your business run faster and more efficiently.",
-  "btn-view":"View Portfolio","stat-years":"Years Experience","stat-projects":"Key Projects",
-  "skill-design":"Creative Design","skill-video":"Videography","skill-3d":"3D Modeling","skill-tech":"Web & AI",
-  "port-label":"Selected Works","port-title":"Portfolio.",
-  "filter-all":"All","filter-visual":"Visual & Video","filter-3d":"3D & Tech","filter-system":"Web Systems",
-  "p1t":"Promotion & Social Media Design","p1d":"Creating print and digital promotional materials using Photoshop for high detail, and Canva for fast turnaround.","p1mt":"Promotional Material Design","p1md":"Creation of design assets for promotional needs. Utilizing Photoshop for precise visual details, combined with Canva to ensure daily social media content production runs quickly and efficiently.","btn-detail":"View Details",
-  "p2t":"3D Wheel Design (Solidworks)","p2d":"Designing accurate technical drawings and 3D vehicle wheel shapes ready for mass production.","p2mt":"3D Wheel Design Innovation","p2md":"Creating innovative 3D car wheel models using Solidworks. The design is precisely made to be ready for the factory production stage.",
-  "p3t":"BOP & E-Warranty System Website","p3d":"Building a functional website for the Operational Expense system and E-Warranty integration.","p3mt":"BOP & E-Warranty System Website","p3md":"Focused on creating a website to digitize daily Operational Expenses (BOP) tracking, equipped with an E-Warranty integration menu for customer service.",
-  "p4t":"Automated E-Voucher System","p4d":"Creating a program that automatically sends vouchers to customers to avoid admin typing errors.","p4mt":"Automated E-Voucher System","p4md":"Replacing manual, error-prone workflows with an automated system using Google Apps Script.",
-  "exp-label":"Track Record","exp-title":"Experience.","exp-d1":"2024 — Present",
-  "exp-desc1":"Fully responsible for the company's marketing design quality, doubling in IT by building operational system websites (BOP) and voucher automation to streamline business processes.",
-  "exp-desc2":"Over 10 years of experience maintaining corporate visual identity, from designing brochures and 3D vehicle wheel modeling, to providing light IT support.",
-  "footer-cta-label":"Let's Collaborate","footer-title":"Ready to collaborate<br>with you.","footer-loc":"Semarang, Indonesia",
-  "modal-label":"Project Details","modal-btn":"Discuss Project"
-}
-};
-let curLang='id';
-function setLang(l){
-  if(curLang===l)return;
-  curLang=l;
-  document.getElementById('lang-id').className='lang-btn '+(l==='id'?'active':'inactive');
-  document.getElementById('lang-en').className='lang-btn '+(l==='en'?'active':'inactive');
-  document.documentElement.lang=l;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k=el.getAttribute('data-i18n');
-    if(T[l][k])el.innerHTML=T[l][k];
-  });
-}
-
-// Cursor
-const cur=document.getElementById('cursor'),trail=document.getElementById('cursor-trail');
-let mx=0,my=0,tx=0,ty=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-function animTrail(){tx+=(mx-tx)*.12;ty+=(my-ty)*.12;trail.style.left=tx+'px';trail.style.top=ty+'px';requestAnimationFrame(animTrail)}
-animTrail();
-document.querySelectorAll('a,button,.cursor-pointer').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(3.5)';trail.style.transform='translate(-50%,-50%) scale(1.5)'});
-  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';trail.style.transform='translate(-50%,-50%) scale(1)'});
+/* ── CURSOR ── */
+const csr = document.getElementById('csr');
+const ring = document.getElementById('csr-ring');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  csr.style.left = mx + 'px'; csr.style.top = my + 'px';
 });
+(function animRing() {
+  rx += (mx - rx) * .12; ry += (my - ry) * .12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+})();
 
-// Scroll
-const prog=document.getElementById('prog'),nav=document.getElementById('nav'),btt=document.getElementById('btt');
-window.addEventListener('scroll',()=>{
-  const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-  prog.style.width=(s/h*100)+'%';
-  nav.classList.toggle('scrolled',s>80);
-  btt.classList.toggle('show',s>500);
+/* ── SCROLL EVENTS ── */
+const prog = document.getElementById('prog');
+const nav  = document.getElementById('main-nav');
+const btt  = document.getElementById('btt');
+
+function onScroll() {
+  const s = scrollY;
+  const h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = (s / h * 100) + '%';
+  nav.classList.toggle('scrolled', s > 60);
+  btt.classList.toggle('show', s > 500);
   revealAll();
-});
+}
+window.addEventListener('scroll', onScroll, { passive: true });
 
-// Reveal
-function revealAll(){
-  document.querySelectorAll('.reveal').forEach(el=>{
-    if(el.getBoundingClientRect().top<window.innerHeight-120)el.classList.add('active');
+/* ── REVEAL ON SCROLL ── */
+function revealAll() {
+  document.querySelectorAll('.reveal:not(.active)').forEach(el => {
+    if (el.getBoundingClientRect().top < innerHeight - 80)
+      el.classList.add('active');
+  });
+}
+window.addEventListener('load', revealAll);
+
+/* ── PORTFOLIO FILTER ── */
+function filterPort(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('onclick').includes(`'${cat}'`));
+  });
+  document.querySelectorAll('.port-card').forEach(card => {
+    const show = cat === 'all' || card.dataset.cat === cat;
+    card.style.transition = 'opacity .35s, transform .35s';
+    card.style.opacity = '0'; card.style.transform = 'scale(.95)';
+    setTimeout(() => {
+      card.style.display = show ? '' : 'none';
+      if (show) requestAnimationFrame(() => {
+        card.style.opacity = '1'; card.style.transform = '';
+      });
+    }, 350);
   });
 }
 
-// Magnetic
-document.querySelectorAll('.magnetic').forEach(el=>{
-  el.addEventListener('mousemove',e=>{
-    const r=el.getBoundingClientRect();
-    el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.25}px,${(e.clientY-r.top-r.height/2)*.25}px)`;
-  });
-  el.addEventListener('mouseleave',()=>el.style.transform='');
-});
-
-// Filter
-function filterPort(cat){
-  document.querySelectorAll('.filter-btn').forEach(b=>{
-    const match=b.getAttribute('onclick').includes(`'${cat}'`);
-    b.classList.toggle('active',match);
-  });
-  document.querySelectorAll('.port-item').forEach(item=>{
-    const show=cat==='all'||item.dataset.cat===cat;
-    item.style.opacity='0';item.style.transform='scale(.95)';
-    setTimeout(()=>{
-      item.style.display=show?'':'none';
-      if(show)setTimeout(()=>{item.style.opacity='1';item.style.transform='scale(1)'},30);
-    },350);
-  });
+/* ── EXPERIENCE TABS ── */
+function showExp(idx) {
+  document.querySelectorAll('.exp-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+  document.querySelectorAll('.exp-nav-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
 }
 
-// Modal
-const modal=document.getElementById('modal');
-function openModal(img,el){
-  const wrap=el.closest('.port-item'),data=wrap.querySelector('.modal-data');
-  document.getElementById('modal-title').innerHTML=data.querySelector('.mt').innerHTML;
-  document.getElementById('modal-desc').innerHTML=data.querySelector('.md').innerHTML;
-  document.getElementById('modal-cat').innerHTML=data.querySelector('.mc').innerHTML;
-  const imgEl=document.getElementById('modal-img');
-  imgEl.innerHTML=`<img src="${img}" style="width:100%;height:auto;max-height:55vh;object-fit:contain;border-radius:1.5rem;border:1px solid #f0f0f0" onerror="this.src='https://images.unsplash.com/photo-1626785776965-4c5151cbb00f?q=80&w=600'">`;
-  modal.classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeModal(e){
-  if(!e||e.target===modal){
-    modal.classList.remove('open');
-    document.body.style.overflow='';
-    setTimeout(()=>document.getElementById('modal-img').innerHTML='',400);
+/* ── i18n ── */
+const T = {
+  id: {
+    'nav-about':'Tentang','nav-port':'Portofolio','nav-exp':'Pengalaman','nav-contact':'Kontak',
+    'greeting':'Tersedia untuk kolaborasi',
+    'hero-tag':'Semarang, Jawa Tengah',
+    'hero-role':'Creative Technologist & Multidisciplinary Designer',
+    'hero-desc':'Desainer multidisiplin yang fokus menghasilkan karya detail secara visual, namun tetap didukung sistem otomatis agar bisnis Anda berjalan lebih cepat dan efisien.',
+    'stat-years':'Tahun Pengalaman','stat-projects':'Proyek Unggulan',
+    'btn-view':'Lihat Portofolio',
+    'badge-years':'Tahun',
+    'about-eyebrow':'Tentang Saya',
+    'about-title':'Creative Technologist<br><em style="font-style:italic;color:var(--muted)">yang serba bisa.</em>',
+    'about-p1':'Saya adalah desainer multidisiplin dengan lebih dari 10 tahun pengalaman menjaga identitas visual perusahaan. Mulai dari desain grafis, videografi, pemodelan 3D, hingga pengembangan web dan otomasi sistem.',
+    'about-p2':'Saat ini saya menjabat sebagai Creative Technologist di PT Sumber Harapan Mitra Perkasa — bertanggung jawab penuh atas kualitas desain pemasaran sekaligus membangun sistem digital yang membuat proses bisnis berjalan lebih efisien.',
+    'skills-eyebrow':'Keahlian','skills-title':'Senjata saya.',
+    'sk1':'Desain Kreatif','sk2':'Videografi','sk3':'Pemodelan 3D','sk4':'Web & AI',
+    'port-eyebrow':'Karya Terpilih','port-title':'Portofolio.',
+    'f-all':'Semua','f-visual':'Visual & Video','f-3d':'3D & Teknis','f-sys':'Sistem Web',
+    'btn-detail':'Lihat Detail',
+    'p1t':'Desain Promosi & Media Sosial','p1d':'Pembuatan materi promosi cetak dan digital menggunakan Photoshop untuk detail tinggi, dan Canva untuk pekerjaan yang cepat.',
+    'p2t':'Desain Velg 3D (Solidworks)','p2d':'Merancang gambar teknik dan bentuk 3D velg kendaraan yang akurat dan siap diproduksi secara massal.',
+    'p3t':'Website BOP & E-Garansi','p3d':'Pembuatan website fungsional dan integrasi E-Garansi sesuai kebutuhan perusahaan.',
+    'p4t':'Sistem Otomatis E-Voucher','p4d':'Menciptakan program yang secara otomatis mengirimkan voucher ke pelanggan untuk menghindari salah ketik dari admin.',
+    'exp-eyebrow':'Track Record','exp-title':'Pengalaman.','exp-nav-label':'Pilih Posisi',
+    'exp2-nav':'IT Desainer Grafis','exp1-period':'2024 — Sekarang',
+    'exp1-desc':'Bertanggung jawab penuh atas kualitas desain pemasaran perusahaan, merangkap pekerjaan IT dengan membuat website sistem operasional (BOP) dan otomasi voucher agar proses bisnis berjalan ringkas dan efisien.',
+    'exp2-title':'IT Desainer Grafis',
+    'exp2-desc':'Berpengalaman lebih dari 10 tahun dalam menjaga identitas visual perusahaan, mulai dari merancang brosur, membuat pemodelan 3D velg kendaraan, hingga memberikan dukungan IT ringan.',
+    'contact-title':'Siap berkolaborasi<br><em>bersama Anda.</em>',
+    'contact-desc':'Punya proyek menarik? Mari kita diskusikan dan wujudkan bersama. Saya terbuka untuk kolaborasi freelance maupun full-time.',
+    'contact-btn':'Kirim Pesan','loc-label':'Lokasi',
+  },
+  en: {
+    'nav-about':'About','nav-port':'Portfolio','nav-exp':'Experience','nav-contact':'Contact',
+    'greeting':'Available for collaboration',
+    'hero-tag':'Semarang, Central Java',
+    'hero-role':'Creative Technologist & Multidisciplinary Designer',
+    'hero-desc':'Multidisciplinary designer focused on producing visually detailed work, backed by automated systems to make your business run faster and more efficiently.',
+    'stat-years':'Years Experience','stat-projects':'Key Projects',
+    'btn-view':'View Portfolio',
+    'badge-years':'Years',
+    'about-eyebrow':'About Me',
+    'about-title':'Creative Technologist<br><em style="font-style:italic;color:var(--muted)">with a wide range.</em>',
+    'about-p1':'I am a multidisciplinary designer with over 10 years of experience maintaining corporate visual identity — from graphic design, videography, and 3D modeling to web development and system automation.',
+    'about-p2':'Currently serving as Creative Technologist at PT Sumber Harapan Mitra Perkasa — fully responsible for marketing design quality while building digital systems that streamline business processes.',
+    'skills-eyebrow':'Skills','skills-title':'My toolkit.',
+    'sk1':'Creative Design','sk2':'Videography','sk3':'3D Modeling','sk4':'Web & AI',
+    'port-eyebrow':'Selected Works','port-title':'Portfolio.',
+    'f-all':'All','f-visual':'Visual & Video','f-3d':'3D & Tech','f-sys':'Web Systems',
+    'btn-detail':'View Details',
+    'p1t':'Promotion & Social Media Design','p1d':'Creating print and digital promotional materials using Photoshop for high detail, and Canva for fast turnaround.',
+    'p2t':'3D Wheel Design (Solidworks)','p2d':'Designing accurate technical drawings and 3D vehicle wheel shapes ready for mass production.',
+    'p3t':'BOP & E-Warranty System Website','p3d':'Building a functional website for the Operational Expense system and E-Warranty integration.',
+    'p4t':'Automated E-Voucher System','p4d':'Creating a program that automatically sends vouchers to customers to avoid admin typing errors.',
+    'exp-eyebrow':'Track Record','exp-title':'Experience.','exp-nav-label':'Select Position',
+    'exp2-nav':'IT Graphic Designer','exp1-period':'2024 — Present',
+    'exp1-desc':'Fully responsible for the company\'s marketing design quality, doubling in IT by building operational system websites (BOP) and voucher automation to streamline business processes.',
+    'exp2-title':'IT Graphic Designer',
+    'exp2-desc':'Over 10 years of experience maintaining corporate visual identity, from designing brochures and 3D vehicle wheel modeling, to providing light IT support.',
+    'contact-title':'Ready to collaborate<br><em>with you.</em>',
+    'contact-desc':'Have an exciting project? Let\'s discuss and bring it to life together. I\'m open to freelance and full-time collaborations.',
+    'contact-btn':'Send Message','loc-label':'Location',
   }
+};
+let curLang = 'id';
+function setLang(l) {
+  curLang = l;
+  document.getElementById('lb-id').className = 'lang-btn ' + (l==='id' ? 'active' : 'inactive');
+  document.getElementById('lb-en').className = 'lang-btn ' + (l==='en' ? 'active' : 'inactive');
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (T[l][k] !== undefined) el.innerHTML = T[l][k];
+  });
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
-
-window.addEventListener('load',revealAll);
 </script>
 </body>
 </html>
